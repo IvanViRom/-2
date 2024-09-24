@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee blog</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <form>
+    <header></header>
+    <nav></nav>
+    <main>
+        <h1> Coffee blog </h1>
+        <section>
+            <!--Текстовое поле -->
+            <label for="name">Название напитка</label>
+            <input type="text" id="name" name="title" placeholder="Американо">
+            <p>
+             <label for="text">Сорт кофе</label>
+         <select name="sort">
+            <option>Гватемала</option>
+            <option>Арабика</option>
+            <option>Другое</option>
+            </select>
+            </p>
+            <!--Текстовое поле -->
+        <label for="surename">Крепкость обжарки</label>
+        <p>
+        <input type="radio" id="hard" name="strong"> Крепкая
+        </p> 
+        <input type="radio" id="mid" name="strong" value="2"> Средняя
+        <p>
+        <input type="radio" id="light" name="strong" value="1"> Легкая
+        </p>
+        <p>
+            <label for="images">Изображение <input type="text" name="image"></label>
+        </p>
+        <p>
+            <label for="surename">Стоимость напитка</label>
+            <!--Тексковое поле -->
+            <input type="surename" name="cost" >
+        </p>
+        <label for="surename">Описание</label>
+        <textarea id="message" name="description"></textarea>
+        <p>
+            <input type="submit" value="Добавить напиток">
+    </form>
+        </p>
+        <p>
+            <table id="table">
+                <thead>
+                <tr>
+                    <td>Изображение</td>
+                    <td>Название</td>
+                    <td>Сорт</td>
+                    <td>Крепкость обжарки</td>
+                    <td>Стоимость</td>
+                    <td>Описание</td>
+                </tr>
+                </thead>
+             </table>
+        </p>
+
+
+
+</body>
+<script> 
+    const f = document.forms[0]; 
+    let tr = document.getElementById("table"); 
+    let t = tr; 
+    f.addEventListener("submit", (e) => { 
+        e.preventDefault(); 
+        let body = {}; 
+        for (let i = 0; i < f.elements.length; i++) { 
+            let tag = f[i]; 
+            if (tag.name) { 
+                if (tag.type === "radio" && tag.checked) { 
+                    body[tag.name] = tag.value; 
+                } else if (tag.type !== "radio") { 
+                    body[tag.name] = tag.value; 
+                } 
+            } 
+        } 
+        console.log(body); 
+        let html = "<tr>"; 
+        html += `<td><img src="${body.image}" width="50" alt="${body.title}"></td>`; 
+        html += `<td>${body.title || ""}</td>`; 
+        html += `<td>${body.sort || ""}</td>`; 
+        html += `<td>${body.strong || ""}</td>`; 
+        html += `<td>${body.cost || ""}</td>`; 
+        html += `<td>${body.description || ""}</td>`; 
+        html += "</tr>" 
+        t.innerHTML += html; 
+    }) 
+</script>
+</html>
